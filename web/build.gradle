@@ -16,6 +16,8 @@ vaadin {
 }
 
 dependencies {
+
+
     compile 'com.github.vok:vok-framework-sql2o:0.3.0'
 
     // logging
@@ -33,6 +35,7 @@ dependencies {
 
     // db
     compile 'org.flywaydb:flyway-core:4.2.0'
+    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.1.0.jre8'
     compile 'com.h2database:h2:1.4.196'
 
     // REST

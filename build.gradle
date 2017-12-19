@@ -11,7 +11,7 @@ defaultTasks 'clean', 'build'
 
 
 allprojects {
-    group 'sashastory.dev'
+    group 'com.example.vok'
     version '1.0-SNAPSHOT'
 }
 

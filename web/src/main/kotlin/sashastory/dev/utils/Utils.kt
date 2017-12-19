@@ -1,4 +1,4 @@
-package com.example.vok
+package sashastory.dev.utils
 
 import com.github.vok.karibudsl.*
 import com.vaadin.event.ShortcutAction

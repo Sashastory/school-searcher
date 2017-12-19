@@ -1,0 +1,6 @@
+CREATE TABLE User (
+  id BIGINT NOT NULL,
+  userName VARCHAR(30) NOT NULL,
+  password VARCHAR(30) NOT NULL,
+  PRIMARY KEY ( id )
+)
