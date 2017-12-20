@@ -30,7 +30,7 @@ class SchoolSearchView : VerticalLayout(), View {
     private var filterSelector: RadioButtonGroup<String>
 
     init {
-        label("Выберите критерий для поиска") {
+        label("Выберите критерий для поиска школы") {
             alignment = Alignment.TOP_LEFT
             addStyleNames(ValoTheme.LABEL_H1, ValoTheme.LABEL_COLORED)
         }

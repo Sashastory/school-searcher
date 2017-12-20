@@ -1,12 +1,12 @@
 package sashastory.dev.dao
 
-import com.github.vok.framework.sql2o.Dao
-import com.github.vok.framework.sql2o.findAll
-import com.github.vok.framework.sql2o.findById
+import com.github.vok.framework.sql2o.*
 import com.github.vok.framework.sql2o.vaadin.and
 import com.github.vok.framework.sql2o.vaadin.dataProvider
 import com.github.vok.framework.sql2o.vaadin.getAll
+import com.sun.xml.bind.v2.model.core.ID
 import sashastory.dev.model.AppUser
+import sashastory.dev.model.Application
 import javax.ws.rs.NotFoundException
 
 /**
@@ -19,11 +19,14 @@ object Sql2oAppUserDao : Dao<AppUser> {
 
     fun getUserById(id: Long): AppUser = findById(id) ?: throw NotFoundException("Нет пользователя с таким $id")
 
-    fun getUserByUserNameAndPassword(userName: String, password: String): List<AppUser> {
-        return Sql2oAppUserDao.dataProvider
-                .and { AppUser::userName eq userName }
-                .and { AppUser::password eq password }
-                .getAll()
-    }
+    fun getUserByUserNameAndPassword(userName: String, password: String): List<AppUser> =
+            Sql2oAppUserDao.dataProvider
+                    .and { AppUser::userName eq userName }
+                    .and { AppUser::password eq password }
+                    .getAll()
+
+
+    fun getUserApplications(id: Long): List<Application> =
+            Sql2oApplicationDao.dataProvider.and { Application::appUserId eq id }.getAll()
 
 }
