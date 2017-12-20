@@ -7,7 +7,7 @@ import com.vaadin.navigator.ViewChangeListener
 import com.vaadin.shared.ui.ValueChangeMode
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
-import sashastory.dev.dao.Sql2oFormDao
+import sashastory.dev.dao.FormDao
 import sashastory.dev.model.Form
 
 /**
@@ -95,7 +95,7 @@ class FormSearchView : VerticalLayout(), View {
     }
 
     private fun listAllForms() {
-        grid?.setItems(Sql2oFormDao.getAllForms())
+        grid?.setItems(FormDao.getAllForms())
     }
 
     private fun listFormsByFilter(filterText: String, filter: TextField) {
@@ -104,9 +104,9 @@ class FormSearchView : VerticalLayout(), View {
             return
         }
         when (filter) {
-            formNumberFilter -> grid?.setItems(Sql2oFormDao.getFormsByNumber(filterText))
-            teacherNameFilter -> grid?.setItems(Sql2oFormDao.getFormsByTeacherName(filterText))
-            studentAmountFilter -> grid?.setItems(Sql2oFormDao.getFormsByStudentAmount(filterText.toInt()))
+            formNumberFilter -> grid?.setItems(FormDao.getFormsByNumber(filterText))
+            teacherNameFilter -> grid?.setItems(FormDao.getFormsByTeacherName(filterText))
+            studentAmountFilter -> grid?.setItems(FormDao.getFormsByStudentAmount(filterText.toInt()))
         }
     }
 

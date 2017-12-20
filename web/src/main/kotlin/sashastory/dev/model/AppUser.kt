@@ -3,6 +3,7 @@ package sashastory.dev.model
 import com.github.vok.framework.sql2o.Entity
 import com.github.vok.framework.sql2o.Table
 import java.io.Serializable
+import java.math.BigDecimal
 import java.time.LocalDate
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotNull
@@ -16,7 +17,7 @@ import javax.validation.constraints.Size
 @Table("APP_USER")
 data class AppUser(
 
-        override var id: Long? = null,
+        override var id: BigDecimal? = null,
 
         @field:NotNull
         @field:Size(min = 5, max = 20)
@@ -46,7 +47,7 @@ data class AppUser(
         @field:Size(min = 11, max = 11)
         var phone: String? = null
 
-) : Entity<Long>, Serializable
+) : Entity<BigDecimal>, Serializable
 
 enum class Sex {
     Мужской,

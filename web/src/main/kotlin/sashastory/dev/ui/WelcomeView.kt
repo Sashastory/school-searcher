@@ -13,27 +13,19 @@ import com.vaadin.ui.themes.ValoTheme
 @AutoView("")
 class WelcomeView : VerticalLayout(), View {
     init {
-        setSizeFull()
-        isMargin = false
-        label("Добро пожаловать в подсистему!") {
-            alignment = Alignment.TOP_CENTER
-            addStyleNames(ValoTheme.LABEL_H1, ValoTheme.LABEL_COLORED)
-        }
-        panel("Функции") {
-            verticalLayout {
-                setSizeFull()
-                isMargin = false
-                defaultComponentAlignment = Alignment.TOP_LEFT
-                label("- Поиск школ по их параметрам") {
-                    styleName = ValoTheme.LABEL_LARGE
-                }
-                label ("- Поиск классов по их параметрам") {
-                    styleName = ValoTheme.LABEL_LARGE
-                }
-                label("- Заявка на поступление при наличии свободных мест в школе") {
-                    styleName = ValoTheme.LABEL_LARGE
-                }
+        verticalLayout {
+            setSizeFull()
+            isMargin = false
+            label("Добро пожаловать в подсистему!") {
+                alignment = Alignment.TOP_CENTER
+                addStyleNames(ValoTheme.LABEL_H1, ValoTheme.LABEL_COLORED)
             }
+            image(resource = ThemeResource("images/students.jpeg")) {
+                alignment = Alignment.MIDDLE_CENTER
+            }
+            label { html("<strong>Версия Vaadin: </strong> ${Version.getFullVersion()}") }
+            label { html("<strong>Версия Kotlin: </strong> ${KotlinVersion.CURRENT}") }
+            label { html("<strong>Версия JVM:</strong> $jvmVersion") }
         }
     }
 

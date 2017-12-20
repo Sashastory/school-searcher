@@ -1,20 +1,16 @@
 package sashastory.dev.ui
 
 import com.github.vok.karibudsl.*
-import com.oracle.util.Checksums.update
 import com.vaadin.icons.VaadinIcons
 import com.vaadin.navigator.View
 import com.vaadin.server.Page
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
-import sashastory.dev.dao.Sql2oAppUserDao
-import sashastory.dev.dao.Sql2oFormDao
-import sashastory.dev.dao.Sql2oSchoolDao
+import sashastory.dev.dao.FormDao
+import sashastory.dev.dao.SchoolDao
 import sashastory.dev.model.Application
 import sashastory.dev.model.Form
-import sashastory.dev.model.School
-import sashastory.dev.security.LoginService
-import java.time.LocalDate
+import sashastory.dev.security.Authentication
 import java.util.*
 
 /**
@@ -34,7 +30,7 @@ class ApplicationView : VerticalLayout(), View {
 
     init {
         isSpacing = false
-        schoolMap = Sql2oSchoolDao.getSchoolsWithFreeSpots().map { it.schoolName to it.id }.toMap()
+        schoolMap = SchoolDao.getSchoolsWithFreeSpots().map { it.schoolName to it.id }.toMap()
         verticalLayout {
             label("Прием заявок на поступление") {
                 alignment = Alignment.TOP_LEFT
@@ -43,7 +39,7 @@ class ApplicationView : VerticalLayout(), View {
             panel("Критерии") {
                 w = 40.perc
                 icon = VaadinIcons.CALENDAR
-                addStyleNames("#3dbc1a")
+                addStyleNames("color2")
                 verticalLayout {
                     setSizeFull()
                     schoolSelect = nativeSelect("Выберите школу со свободными местами") {
@@ -79,7 +75,7 @@ class ApplicationView : VerticalLayout(), View {
 
         if (schoolSelect.value != null) {
 
-            val forms: List<Form> = Sql2oFormDao.getFormsWithSpotsForSchoolId(schoolMap[schoolSelect.value]!!)
+            val forms: List<Form> = FormDao.getFormsWithSpotsForSchoolId(schoolMap[schoolSelect.value]!!)
             formMap = forms.map { it.formNumber to it.id }.toMap()
 
             formSelect.isVisible = true
@@ -94,15 +90,15 @@ class ApplicationView : VerticalLayout(), View {
     private fun apply() {
         if (selectedSchool.isNotEmpty() && selectedForm.isNotEmpty()) {
             val application: Application = Application(
-                    appUserId = LoginService.currentUser?.id,
+                    appUserId = Authentication.currentUser?.id,
                     schoolId = schoolMap[selectedSchool],
                     formId = formMap[selectedForm],
                     applicationDate = Date())
             application.save()
+            Page.getCurrent().reload()
             Notification("Поздравляем!",
                     "Ваша заявка была успешно сформирована",
                     Notification.Type.ASSISTIVE_NOTIFICATION)
-            Page.getCurrent().reload()
         }
 
     }

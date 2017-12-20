@@ -3,6 +3,7 @@ package sashastory.dev.model
 import com.github.vok.framework.sql2o.Entity
 import com.github.vok.framework.sql2o.Table
 import java.io.Serializable
+import java.math.BigDecimal
 import java.time.LocalDate
 
 /**
@@ -12,7 +13,7 @@ import java.time.LocalDate
 @Table("SCHOOL")
 data class School(
 
-        override var id: Long? = null,
+        override var id: BigDecimal? = null,
 
         var schoolName: String? = null,
 
@@ -24,4 +25,4 @@ data class School(
 
         var foundationDate: LocalDate? = null
 
-) : Entity<Long>, Serializable
+) : Entity<BigDecimal>, Serializable

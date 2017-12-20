@@ -6,7 +6,7 @@ import com.vaadin.server.VaadinSession
 import com.vaadin.shared.Position
 import com.vaadin.ui.Notification
 import com.vaadin.ui.themes.ValoTheme
-import sashastory.dev.dao.Sql2oAppUserDao
+import sashastory.dev.dao.AppUserDao
 import sashastory.dev.model.AppUser
 
 /**
@@ -14,14 +14,14 @@ import sashastory.dev.model.AppUser
  * @date 17.12.2017
  */
 
-object LoginService {
+object Authentication {
 
     val currentUser: AppUser?
         get() = Session[AppUser::class]
 
     fun login(userName:String, password: String) {
 
-        val dbUser = Sql2oAppUserDao.getUserByUserNameAndPassword(userName, password).firstOrNull {
+        val dbUser = AppUserDao.getUserByUserNameAndPassword(userName, password).firstOrNull {
             user -> user.userName == userName && user.password == password
         }
 

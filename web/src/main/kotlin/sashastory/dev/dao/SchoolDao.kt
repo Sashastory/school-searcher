@@ -1,15 +1,18 @@
 package sashastory.dev.dao
 
 import com.github.vok.framework.sql2o.Dao
+import com.github.vok.framework.sql2o.Filter
 import com.github.vok.framework.sql2o.findAll
 import com.github.vok.framework.sql2o.findById
 import com.github.vok.framework.sql2o.vaadin.SqlDataProvider
 import com.github.vok.framework.sql2o.vaadin.and
 import com.github.vok.framework.sql2o.vaadin.dataProvider
 import com.github.vok.framework.sql2o.vaadin.getAll
+import com.vaadin.data.provider.DataProvider
 import org.sql2o.Sql2o
 import sashastory.dev.model.Form
 import sashastory.dev.model.School
+import java.math.BigDecimal
 import java.time.LocalDate
 import javax.ws.rs.NotFoundException
 
@@ -19,26 +22,28 @@ import javax.ws.rs.NotFoundException
  * @date 18.12.2017
  */
 
-object Sql2oSchoolDao : Dao<School> {
+object SchoolDao : Dao<School> {
+
+    private val data : DataProvider<School, Filter<School>?> = dataProvider
 
     fun getAllSchools(): List<School> = findAll()
 
-    fun getSchoolById(id: Long): School = findById(id) ?: throw NotFoundException("Нет школы с таким $id")
+    fun getSchoolById(id: BigDecimal): School = findById(id) ?: throw NotFoundException("Нет школы с таким $id")
 
     fun getSchoolsByName(name: String): List<School> =
-            Sql2oSchoolDao.dataProvider.and { School::schoolName like name }.getAll()
+            data.and { School::schoolName like name }.getAll()
 
     fun getSchoolsByPrincipal(principal: String): List<School> =
-            Sql2oSchoolDao.dataProvider.and { School::principal like principal }.getAll()
+            data.and { School::principal like principal }.getAll()
 
     fun getSchoolsByAddress(address: String): List<School> =
-            Sql2oSchoolDao.dataProvider.and { School::schoolAddress like address }.getAll()
+            data.and { School::schoolAddress like address }.getAll()
 
     fun getSchoolsByPhone(phone: String): List<School> =
-            Sql2oSchoolDao.dataProvider.and { School::phone like phone }.getAll()
+            data.and { School::phone like phone }.getAll()
 
     fun getSchoolsByFoundationDate(foundationDate: LocalDate): List<School> =
-            Sql2oSchoolDao.dataProvider.and { School::foundationDate eq foundationDate }.getAll()
+            data.and { School::foundationDate eq foundationDate }.getAll()
 
     fun getSchoolsWithFreeSpots(): List<School> {
         val dp = SqlDataProvider(School::class.java,

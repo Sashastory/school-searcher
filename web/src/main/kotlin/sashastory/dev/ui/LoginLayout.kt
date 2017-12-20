@@ -1,14 +1,12 @@
 package sashastory.dev.ui
 
 import com.github.vok.karibudsl.*
-import com.vaadin.server.Page
 import com.vaadin.ui.Alignment
-import com.vaadin.ui.Notification.show
 import com.vaadin.ui.TextField
 import com.vaadin.ui.UI
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.themes.ValoTheme
-import sashastory.dev.security.LoginService
+import sashastory.dev.security.Authentication
 
 /**
  * @author Александр
@@ -60,6 +58,6 @@ class LoginLayout : VerticalLayout() {
     }
 
     private fun login() {
-        LoginService.login(username.value, password.value)
+        Authentication.login(username.value, password.value)
     }
 }

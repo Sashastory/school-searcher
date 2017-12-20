@@ -1,7 +1,7 @@
 package sashastory.dev.rest
 
 import org.atmosphere.config.service.Get
-import sashastory.dev.dao.Sql2oAppUserDao
+import sashastory.dev.dao.AppUserDao
 import sashastory.dev.model.AppUser
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
@@ -17,6 +17,6 @@ class AppUserRestController {
 
     @Get
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAll(): List<AppUser> = Sql2oAppUserDao.getAllUsers()
+    fun getAll(): List<AppUser> = AppUserDao.getAllUsers()
 
 }

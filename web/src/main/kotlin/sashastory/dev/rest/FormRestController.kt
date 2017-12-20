@@ -1,7 +1,7 @@
 package sashastory.dev.rest
 
 import org.atmosphere.config.service.Get
-import sashastory.dev.dao.Sql2oFormDao
+import sashastory.dev.dao.FormDao
 import sashastory.dev.model.Form
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
@@ -16,6 +16,6 @@ class FormRestController {
 
     @Get
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAll(): List<Form> = Sql2oFormDao.getAllForms()
+    fun getAll(): List<Form> = FormDao.getAllForms()
 
 }
