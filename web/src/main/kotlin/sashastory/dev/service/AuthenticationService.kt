@@ -1,4 +1,4 @@
-package sashastory.dev.security
+package sashastory.dev.service
 
 import com.github.vok.framework.Session
 import com.vaadin.server.Page
@@ -14,14 +14,14 @@ import sashastory.dev.model.AppUser
  * @date 17.12.2017
  */
 
-object Authentication {
+object AuthenticationService {
 
     val currentUser: AppUser?
         get() = Session[AppUser::class]
 
     fun login(userName:String, password: String) {
 
-        val dbUser = AppUserDao.getUserByUserNameAndPassword(userName, password).firstOrNull {
+        val dbUser = DataService.appUserDao.getUserByUserNameAndPassword(userName, password).firstOrNull {
             user -> user.userName == userName && user.password == password
         }
 

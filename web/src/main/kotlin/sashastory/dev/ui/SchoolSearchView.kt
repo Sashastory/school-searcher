@@ -9,6 +9,7 @@ import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.dao.SchoolDao
 import sashastory.dev.model.School
+import sashastory.dev.service.DataService
 import java.time.LocalDate
 
 /**
@@ -132,7 +133,7 @@ class SchoolSearchView : VerticalLayout(), View {
 
 
     private fun listAllSchools() {
-        grid?.setItems(SchoolDao.getAllSchools())
+        grid?.setItems(DataService.schoolDao.getAllSchools())
     }
 
     private fun listSchoolsByFilter(filterText: String, filter: AbstractComponent) {
@@ -141,15 +142,15 @@ class SchoolSearchView : VerticalLayout(), View {
             return
         }
         when (filter) {
-            schoolNameFilter -> grid?.setItems(SchoolDao.getSchoolsByName(filterText))
-            principalFilter -> grid?.setItems(SchoolDao.getSchoolsByPrincipal(filterText))
-            addressFilter -> grid?.setItems(SchoolDao.getSchoolsByAddress(filterText))
-            phoneFilter -> grid?.setItems(SchoolDao.getSchoolsByPhone(filterText))
+            schoolNameFilter -> grid?.setItems(DataService.schoolDao.getSchoolsByName(filterText))
+            principalFilter -> grid?.setItems(DataService.schoolDao.getSchoolsByPrincipal(filterText))
+            addressFilter -> grid?.setItems(DataService.schoolDao.getSchoolsByAddress(filterText))
+            phoneFilter -> grid?.setItems(DataService.schoolDao.getSchoolsByPhone(filterText))
         }
     }
 
     private fun listSchoolByDate(filterDate: LocalDate) {
-        grid?.setItems(SchoolDao.getSchoolsByFoundationDate(filterDate))
+        grid?.setItems(DataService.schoolDao.getSchoolsByFoundationDate(filterDate))
     }
 
     override fun enter(event: ViewChangeListener.ViewChangeEvent?) {

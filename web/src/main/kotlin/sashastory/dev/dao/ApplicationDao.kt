@@ -17,7 +17,7 @@ import javax.ws.rs.NotFoundException
  * @author Александр
  * @date 18.12.2017
  */
-object ApplicationDao : Dao<Application> {
+class ApplicationDao : Dao<Application> {
 
     private val data: DataProvider<Application, Filter<Application>?> = dataProvider
 
@@ -25,7 +25,7 @@ object ApplicationDao : Dao<Application> {
 
     fun getApplicationById(id: BigDecimal): Application = findById(id) ?: throw NotFoundException("Нет заявки с таким $id")
 
-    fun getUserApplications(id: BigDecimal): List<Application> =
-            data.and { Application::id eq id }.getAll()
+    fun getUserApplications(id: Long): List<Application>
+            = data.and { Application::id eq BigDecimal(id) }.getAll()
 
 }

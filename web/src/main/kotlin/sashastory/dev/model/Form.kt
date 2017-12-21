@@ -13,7 +13,7 @@ import javax.validation.constraints.Max
 
 @Table("FORM")
 data class Form(
-        override var id: BigDecimal? = null,
+        override var id: Long? = null,
 
         var formNumber: String? = null,
 
@@ -22,6 +22,6 @@ data class Form(
         @Max(30)
         var studentAmount: Int? = null,
 
-        var schoolId: Long? = null
+        var schoolId: BigDecimal? = null
 
-) : Entity<BigDecimal>, Serializable
+) : Entity<Long>, Serializable

@@ -4,13 +4,16 @@ import com.github.vok.karibudsl.*
 import com.vaadin.icons.VaadinIcons
 import com.vaadin.navigator.View
 import com.vaadin.server.Page
+import com.vaadin.shared.Position
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.dao.FormDao
 import sashastory.dev.dao.SchoolDao
 import sashastory.dev.model.Application
 import sashastory.dev.model.Form
-import sashastory.dev.security.Authentication
+import sashastory.dev.service.ApplicationService
+import sashastory.dev.service.AuthenticationService
+import sashastory.dev.service.DataService
 import java.util.*
 
 /**
@@ -30,7 +33,7 @@ class ApplicationView : VerticalLayout(), View {
 
     init {
         isSpacing = false
-        schoolMap = SchoolDao.getSchoolsWithFreeSpots().map { it.schoolName to it.id }.toMap()
+        schoolMap = DataService.schoolDao.getSchoolsWithFreeSpots().map { it.schoolName to it.id }.toMap()
         verticalLayout {
             label("Прием заявок на поступление") {
                 alignment = Alignment.TOP_LEFT
@@ -75,7 +78,7 @@ class ApplicationView : VerticalLayout(), View {
 
         if (schoolSelect.value != null) {
 
-            val forms: List<Form> = FormDao.getFormsWithSpotsForSchoolId(schoolMap[schoolSelect.value]!!)
+            val forms: List<Form> = DataService.formDao.getFormsWithSpotsForSchoolId(schoolMap[schoolSelect.value]!!)
             formMap = forms.map { it.formNumber to it.id }.toMap()
 
             formSelect.isVisible = true
@@ -89,16 +92,19 @@ class ApplicationView : VerticalLayout(), View {
 
     private fun apply() {
         if (selectedSchool.isNotEmpty() && selectedForm.isNotEmpty()) {
-            val application: Application = Application(
-                    appUserId = Authentication.currentUser?.id,
+            val application = Application(
+                    appUserId = AuthenticationService.currentUser?.id,
                     schoolId = schoolMap[selectedSchool],
                     formId = formMap[selectedForm],
                     applicationDate = Date())
-            application.save()
+            ApplicationService.apply(application)
             Page.getCurrent().reload()
-            Notification("Поздравляем!",
-                    "Ваша заявка была успешно сформирована",
-                    Notification.Type.ASSISTIVE_NOTIFICATION)
+            Notification("Поздравляем!", "Ваша заявка была успешно сформирована",
+                    Notification.Type.HUMANIZED_MESSAGE).apply {
+                styleName = "${ValoTheme.NOTIFICATION_CLOSABLE} ${ValoTheme.NOTIFICATION_SUCCESS}"
+                position = Position.TOP_CENTER
+                show(Page.getCurrent())
+            }
         }
 
     }

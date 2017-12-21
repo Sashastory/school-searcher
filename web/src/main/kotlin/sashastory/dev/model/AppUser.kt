@@ -17,7 +17,7 @@ import javax.validation.constraints.Size
 @Table("APP_USER")
 data class AppUser(
 
-        override var id: BigDecimal? = null,
+        override var id: Long? = null,
 
         @field:NotNull
         @field:Size(min = 5, max = 20)
@@ -47,7 +47,8 @@ data class AppUser(
         @field:Size(min = 11, max = 11)
         var phone: String? = null
 
-) : Entity<BigDecimal>, Serializable
+) : Entity<Long>, Serializable
+
 
 enum class Sex {
     Мужской,

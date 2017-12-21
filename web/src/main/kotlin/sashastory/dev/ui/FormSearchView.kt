@@ -9,6 +9,7 @@ import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.dao.FormDao
 import sashastory.dev.model.Form
+import sashastory.dev.service.DataService
 
 /**
  * @author Александр
@@ -95,7 +96,7 @@ class FormSearchView : VerticalLayout(), View {
     }
 
     private fun listAllForms() {
-        grid?.setItems(FormDao.getAllForms())
+        grid?.setItems(DataService.formDao.getAllForms())
     }
 
     private fun listFormsByFilter(filterText: String, filter: TextField) {
@@ -104,9 +105,9 @@ class FormSearchView : VerticalLayout(), View {
             return
         }
         when (filter) {
-            formNumberFilter -> grid?.setItems(FormDao.getFormsByNumber(filterText))
-            teacherNameFilter -> grid?.setItems(FormDao.getFormsByTeacherName(filterText))
-            studentAmountFilter -> grid?.setItems(FormDao.getFormsByStudentAmount(filterText.toInt()))
+            formNumberFilter -> grid?.setItems(DataService.formDao.getFormsByNumber(filterText))
+            teacherNameFilter -> grid?.setItems(DataService.formDao.getFormsByTeacherName(filterText))
+            studentAmountFilter -> grid?.setItems(DataService.formDao.getFormsByStudentAmount(filterText.toInt()))
         }
     }
 

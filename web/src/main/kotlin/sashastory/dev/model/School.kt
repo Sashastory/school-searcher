@@ -13,7 +13,7 @@ import java.time.LocalDate
 @Table("SCHOOL")
 data class School(
 
-        override var id: BigDecimal? = null,
+        override var id: Long? = null,
 
         var schoolName: String? = null,
 
@@ -25,4 +25,4 @@ data class School(
 
         var foundationDate: LocalDate? = null
 
-) : Entity<BigDecimal>, Serializable
+) : Entity<Long>, Serializable

@@ -13,20 +13,19 @@ import com.vaadin.ui.themes.ValoTheme
 @AutoView("")
 class WelcomeView : VerticalLayout(), View {
     init {
+        setSizeFull()
+        isMargin = false
         verticalLayout {
-            setSizeFull()
-            isMargin = false
+            alignment = Alignment.TOP_CENTER
             label("Добро пожаловать в подсистему!") {
-                alignment = Alignment.TOP_CENTER
                 addStyleNames(ValoTheme.LABEL_H1, ValoTheme.LABEL_COLORED)
             }
-            image(resource = ThemeResource("images/students.jpeg")) {
-                alignment = Alignment.MIDDLE_CENTER
-            }
+            image(resource = ThemeResource("images/students.jpeg"))
             label { html("<strong>Версия Vaadin: </strong> ${Version.getFullVersion()}") }
             label { html("<strong>Версия Kotlin: </strong> ${KotlinVersion.CURRENT}") }
             label { html("<strong>Версия JVM:</strong> $jvmVersion") }
         }
+
     }
 
     override fun enter(event: ViewChangeListener.ViewChangeEvent?) {

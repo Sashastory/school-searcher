@@ -22,13 +22,13 @@ import javax.ws.rs.NotFoundException
  * @date 18.12.2017
  */
 
-object SchoolDao : Dao<School> {
+class SchoolDao : Dao<School> {
 
     private val data : DataProvider<School, Filter<School>?> = dataProvider
 
     fun getAllSchools(): List<School> = findAll()
 
-    fun getSchoolById(id: BigDecimal): School = findById(id) ?: throw NotFoundException("Нет школы с таким $id")
+    fun getSchoolById(id: Long): School = findById(id) ?: throw NotFoundException("Нет школы с таким $id")
 
     fun getSchoolsByName(name: String): List<School> =
             data.and { School::schoolName like name }.getAll()

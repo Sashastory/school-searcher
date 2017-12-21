@@ -9,20 +9,19 @@ import com.github.vok.framework.sql2o.vaadin.dataProvider
 import com.github.vok.framework.sql2o.vaadin.getAll
 import com.vaadin.data.provider.DataProvider
 import sashastory.dev.model.Form
-import java.math.BigDecimal
 import javax.ws.rs.NotFoundException
 
 /**
  * @author Александр
  * @date 18.12.2017
  */
-object FormDao : Dao<Form> {
+class FormDao : Dao<Form> {
 
     private val data: DataProvider<Form, Filter<Form>?> = dataProvider
 
     fun getAllForms(): List<Form> = findAll()
 
-    fun getFormById(id: BigDecimal): Form = findById(id) ?: throw NotFoundException("Нет класса с таким $id")
+    fun getFormById(id: Long): Form = findById(id) ?: throw NotFoundException("Нет класса с таким $id")
 
     fun getFormsByNumber(number: String): List<Form> =
             data.and { Form::formNumber like number }.getAll()

@@ -15,11 +15,11 @@ data class Application(
 
         override var id: BigDecimal? = null,
 
-        var appUserId: BigDecimal? = null,
+        var appUserId: Long? = null,
 
-        var schoolId: BigDecimal? = null,
+        var schoolId: Long? = null,
 
-        var formId: BigDecimal? = null,
+        var formId: Long? = null,
 
         var applicationDate: Date? = null
 
