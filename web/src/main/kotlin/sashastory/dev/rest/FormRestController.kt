@@ -3,6 +3,7 @@ package sashastory.dev.rest
 import org.atmosphere.config.service.Get
 import sashastory.dev.dao.FormDao
 import sashastory.dev.model.Form
+import sashastory.dev.service.DataService
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
@@ -16,6 +17,6 @@ class FormRestController {
 
     @Get
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAll(): List<Form> = FormDao.getAllForms()
+    fun getAll(): List<Form> = DataService.formDao.getAllForms()
 
 }

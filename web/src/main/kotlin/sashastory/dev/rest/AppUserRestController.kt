@@ -3,6 +3,7 @@ package sashastory.dev.rest
 import org.atmosphere.config.service.Get
 import sashastory.dev.dao.AppUserDao
 import sashastory.dev.model.AppUser
+import sashastory.dev.service.DataService
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
@@ -17,6 +18,6 @@ class AppUserRestController {
 
     @Get
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAll(): List<AppUser> = AppUserDao.getAllUsers()
+    fun getAll(): List<AppUser> = DataService.appUserDao.getAllUsers()
 
 }
