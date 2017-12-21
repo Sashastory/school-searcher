@@ -90,7 +90,7 @@ class RegistrationLayout : VerticalLayout(), View {
                         } else {
                             componentError = null
                             this@RegistrationLayout.label("Сохраняем $user")
-                            RegistrationService.register(user)
+                            register(user)
                             Page.getCurrent().reload()
                         }
                     }
@@ -98,9 +98,14 @@ class RegistrationLayout : VerticalLayout(), View {
             }
         }
     }
+
+    private fun register(user: AppUser) {
+        RegistrationService.register(user)
+    }
  }
 
 fun FormLayout.section(caption: String, style: String = ValoTheme.LABEL_H2, block: Label.()->Unit={}) = init(Label(caption)) {
     addStyleNames(style, ValoTheme.LABEL_COLORED)
     block()
 }
+

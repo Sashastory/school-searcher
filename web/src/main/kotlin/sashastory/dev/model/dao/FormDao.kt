@@ -1,4 +1,4 @@
-package sashastory.dev.dao
+package sashastory.dev.model.dao
 
 import com.github.vok.framework.sql2o.Dao
 import com.github.vok.framework.sql2o.Filter
@@ -15,7 +15,7 @@ import javax.ws.rs.NotFoundException
  * @author Александр
  * @date 18.12.2017
  */
-class FormDao : Dao<Form> {
+object FormDao : Dao<Form> {
 
     private val data: DataProvider<Form, Filter<Form>?> = dataProvider
 

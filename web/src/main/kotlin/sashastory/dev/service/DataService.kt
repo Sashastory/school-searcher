@@ -1,9 +1,9 @@
 package sashastory.dev.service
 
-import sashastory.dev.dao.AppUserDao
-import sashastory.dev.dao.ApplicationDao
-import sashastory.dev.dao.FormDao
-import sashastory.dev.dao.SchoolDao
+import sashastory.dev.model.dao.AppUserDao
+import sashastory.dev.model.dao.ApplicationDao
+import sashastory.dev.model.dao.FormDao
+import sashastory.dev.model.dao.SchoolDao
 
 /**
  * @author Александр
@@ -11,9 +11,9 @@ import sashastory.dev.dao.SchoolDao
  */
 object DataService {
 
-    val applicationDao: ApplicationDao = ApplicationDao()
-    val appUserDao: AppUserDao = AppUserDao()
-    val formDao: FormDao = FormDao()
-    val schoolDao: SchoolDao = SchoolDao()
+    val applicationDao: ApplicationDao = ApplicationDao
+    val appUserDao: AppUserDao = AppUserDao
+    val formDao: FormDao = FormDao
+    val schoolDao: SchoolDao = SchoolDao
 
 }

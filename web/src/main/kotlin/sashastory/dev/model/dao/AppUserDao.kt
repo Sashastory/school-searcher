@@ -1,4 +1,4 @@
-package sashastory.dev.dao
+package sashastory.dev.model.dao
 
 import com.github.vok.framework.sql2o.*
 import com.github.vok.framework.sql2o.vaadin.and
@@ -12,7 +12,7 @@ import javax.ws.rs.NotFoundException
  * @author Александр
  * @date 17.12.2017
  */
-class AppUserDao : Dao<AppUser> {
+object AppUserDao : Dao<AppUser> {
 
     private val data: DataProvider<AppUser, Filter<AppUser>?> = dataProvider
 

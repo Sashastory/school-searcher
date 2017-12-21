@@ -1,4 +1,4 @@
-package sashastory.dev.dao
+package sashastory.dev.model.dao
 
 import com.github.vok.framework.sql2o.Dao
 import com.github.vok.framework.sql2o.Filter
@@ -9,10 +9,7 @@ import com.github.vok.framework.sql2o.vaadin.and
 import com.github.vok.framework.sql2o.vaadin.dataProvider
 import com.github.vok.framework.sql2o.vaadin.getAll
 import com.vaadin.data.provider.DataProvider
-import org.sql2o.Sql2o
-import sashastory.dev.model.Form
 import sashastory.dev.model.School
-import java.math.BigDecimal
 import java.time.LocalDate
 import javax.ws.rs.NotFoundException
 
@@ -22,7 +19,7 @@ import javax.ws.rs.NotFoundException
  * @date 18.12.2017
  */
 
-class SchoolDao : Dao<School> {
+object SchoolDao : Dao<School> {
 
     private val data : DataProvider<School, Filter<School>?> = dataProvider
 
