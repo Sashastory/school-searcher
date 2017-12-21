@@ -12,6 +12,7 @@ import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.model.AppUser
 import sashastory.dev.model.Sex
+import sashastory.dev.service.RegistrationService
 
 /**
  * @author Александр
@@ -89,7 +90,7 @@ class RegistrationLayout : VerticalLayout(), View {
                         } else {
                             componentError = null
                             this@RegistrationLayout.label("Сохраняем $user")
-                            user.save()
+                            RegistrationService.register(user)
                             Page.getCurrent().reload()
                         }
                     }

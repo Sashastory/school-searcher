@@ -7,7 +7,6 @@ import com.vaadin.navigator.ViewChangeListener
 import com.vaadin.shared.ui.ValueChangeMode
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
-import sashastory.dev.dao.FormDao
 import sashastory.dev.model.Form
 import sashastory.dev.service.DataService
 

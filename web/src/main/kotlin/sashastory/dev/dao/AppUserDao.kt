@@ -4,12 +4,8 @@ import com.github.vok.framework.sql2o.*
 import com.github.vok.framework.sql2o.vaadin.and
 import com.github.vok.framework.sql2o.vaadin.dataProvider
 import com.github.vok.framework.sql2o.vaadin.getAll
-import com.sun.xml.bind.v2.model.core.ID
 import com.vaadin.data.provider.DataProvider
 import sashastory.dev.model.AppUser
-import sashastory.dev.model.Application
-import java.math.BigDecimal
-import java.math.BigInteger
 import javax.ws.rs.NotFoundException
 
 /**
@@ -24,10 +20,8 @@ class AppUserDao : Dao<AppUser> {
 
     fun getUserById(id: Long): AppUser = findById(id) ?: throw NotFoundException("Нет пользователя с таким $id")
 
-    fun getUserByUserNameAndPassword(userName: String, password: String): List<AppUser> {
+    fun getUserByUserNameAndPassword(userName: String, password: String): List<AppUser>
+            = data.and { AppUser::userName eq userName }.and { AppUser::password eq password }.getAll()
 
-
-        return data.and { AppUser::userName eq userName }.and { AppUser::password eq password }.getAll()
-    }
 
 }

@@ -1,9 +1,10 @@
 package sashastory.dev.rest
 
-import org.atmosphere.config.service.Get
 import sashastory.dev.model.School
 import sashastory.dev.service.DataService
+import javax.ws.rs.GET
 import javax.ws.rs.Path
+import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
@@ -14,7 +15,11 @@ import javax.ws.rs.core.MediaType
 @Path("/schools")
 class SchoolRestController {
 
-    @Get
+    @GET
+    @Path("/{id}")
+    fun get(@PathParam("id") id: Long) : School = DataService.schoolDao.getSchoolById(id)
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     fun getAll(): List<School> = DataService.schoolDao.getAllSchools()
 

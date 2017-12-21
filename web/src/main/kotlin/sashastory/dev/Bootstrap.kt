@@ -43,7 +43,7 @@ class Bootstrap: ServletContextListener {
 }
 
 @WebServlet(urlPatterns = arrayOf("/*"), name = "SecuredUIServlet", asyncSupported = true)
-@VaadinServletConfiguration(ui = SecuredUI::class, productionMode = true)
+@VaadinServletConfiguration(ui = SecuredUI::class, productionMode = false)
 class SecuredUIServlet : VaadinServlet()
 
 /**

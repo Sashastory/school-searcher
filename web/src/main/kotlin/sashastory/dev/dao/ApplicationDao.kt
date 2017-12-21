@@ -8,9 +8,9 @@ import com.github.vok.framework.sql2o.vaadin.and
 import com.github.vok.framework.sql2o.vaadin.dataProvider
 import com.github.vok.framework.sql2o.vaadin.getAll
 import com.vaadin.data.provider.DataProvider
-import sashastory.dev.model.AppUser
 import sashastory.dev.model.Application
 import java.math.BigDecimal
+import java.text.Bidi
 import javax.ws.rs.NotFoundException
 
 /**
@@ -23,7 +23,8 @@ class ApplicationDao : Dao<Application> {
 
     fun getAllApplications(): List<Application> = findAll()
 
-    fun getApplicationById(id: BigDecimal): Application = findById(id) ?: throw NotFoundException("Нет заявки с таким $id")
+    fun getApplicationById(id: Long): Application
+            = findById(BigDecimal(id)) ?: throw NotFoundException("Нет заявки с таким $id")
 
     fun getUserApplications(id: Long): List<Application>
             = data.and { Application::id eq BigDecimal(id) }.getAll()

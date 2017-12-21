@@ -7,8 +7,6 @@ import com.vaadin.server.Page
 import com.vaadin.shared.Position
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
-import sashastory.dev.dao.FormDao
-import sashastory.dev.dao.SchoolDao
 import sashastory.dev.model.Application
 import sashastory.dev.model.Form
 import sashastory.dev.service.ApplicationService
@@ -98,7 +96,6 @@ class ApplicationView : VerticalLayout(), View {
                     formId = formMap[selectedForm],
                     applicationDate = Date())
             ApplicationService.apply(application)
-            Page.getCurrent().reload()
             Notification("Поздравляем!", "Ваша заявка была успешно сформирована",
                     Notification.Type.HUMANIZED_MESSAGE).apply {
                 styleName = "${ValoTheme.NOTIFICATION_CLOSABLE} ${ValoTheme.NOTIFICATION_SUCCESS}"

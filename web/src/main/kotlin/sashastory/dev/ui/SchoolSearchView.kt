@@ -7,7 +7,6 @@ import com.vaadin.navigator.ViewChangeListener
 import com.vaadin.shared.ui.ValueChangeMode
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
-import sashastory.dev.dao.SchoolDao
 import sashastory.dev.model.School
 import sashastory.dev.service.DataService
 import java.time.LocalDate
