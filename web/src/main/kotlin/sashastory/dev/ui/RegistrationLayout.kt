@@ -12,7 +12,7 @@ import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.model.AppUser
 import sashastory.dev.model.Sex
-import sashastory.dev.service.RegistrationService
+import sashastory.dev.service.SecurityService
 
 /**
  * @author Александр
@@ -100,7 +100,7 @@ class RegistrationLayout : VerticalLayout(), View {
     }
 
     private fun register(user: AppUser) {
-        RegistrationService.register(user)
+        SecurityService.register(user)
     }
  }
 

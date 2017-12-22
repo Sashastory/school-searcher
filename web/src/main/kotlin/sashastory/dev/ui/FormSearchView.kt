@@ -8,7 +8,7 @@ import com.vaadin.shared.ui.ValueChangeMode
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.model.Form
-import sashastory.dev.service.DataService
+import sashastory.dev.service.FormSearchService
 
 /**
  * @author Александр
@@ -95,7 +95,7 @@ class FormSearchView : VerticalLayout(), View {
     }
 
     private fun listAllForms() {
-        grid?.setItems(DataService.formDao.getAllForms())
+        grid?.setItems(FormSearchService.formProvider.getAllForms())
     }
 
     private fun listFormsByFilter(filterText: String, filter: TextField) {
@@ -104,9 +104,9 @@ class FormSearchView : VerticalLayout(), View {
             return
         }
         when (filter) {
-            formNumberFilter -> grid?.setItems(DataService.formDao.getFormsByNumber(filterText))
-            teacherNameFilter -> grid?.setItems(DataService.formDao.getFormsByTeacherName(filterText))
-            studentAmountFilter -> grid?.setItems(DataService.formDao.getFormsByStudentAmount(filterText.toInt()))
+            formNumberFilter -> grid?.setItems(FormSearchService.formProvider.getFormsByNumber(filterText))
+            teacherNameFilter -> grid?.setItems(FormSearchService.formProvider.getFormsByTeacherName(filterText))
+            studentAmountFilter -> grid?.setItems(FormSearchService.formProvider.getFormsByStudentAmount(filterText.toInt()))
         }
     }
 

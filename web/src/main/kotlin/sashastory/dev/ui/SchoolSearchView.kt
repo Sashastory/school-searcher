@@ -8,7 +8,7 @@ import com.vaadin.shared.ui.ValueChangeMode
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.model.School
-import sashastory.dev.service.DataService
+import sashastory.dev.service.SchoolSearchService
 import java.time.LocalDate
 
 /**
@@ -132,7 +132,7 @@ class SchoolSearchView : VerticalLayout(), View {
 
 
     private fun listAllSchools() {
-        grid?.setItems(DataService.schoolDao.getAllSchools())
+        grid?.setItems(SchoolSearchService.schoolProvider.getAllSchools())
     }
 
     private fun listSchoolsByFilter(filterText: String, filter: AbstractComponent) {
@@ -141,15 +141,15 @@ class SchoolSearchView : VerticalLayout(), View {
             return
         }
         when (filter) {
-            schoolNameFilter -> grid?.setItems(DataService.schoolDao.getSchoolsByName(filterText))
-            principalFilter -> grid?.setItems(DataService.schoolDao.getSchoolsByPrincipal(filterText))
-            addressFilter -> grid?.setItems(DataService.schoolDao.getSchoolsByAddress(filterText))
-            phoneFilter -> grid?.setItems(DataService.schoolDao.getSchoolsByPhone(filterText))
+            schoolNameFilter -> grid?.setItems(SchoolSearchService.schoolProvider.getSchoolsByName(filterText))
+            principalFilter -> grid?.setItems(SchoolSearchService.schoolProvider.getSchoolsByPrincipal(filterText))
+            addressFilter -> grid?.setItems(SchoolSearchService.schoolProvider.getSchoolsByAddress(filterText))
+            phoneFilter -> grid?.setItems(SchoolSearchService.schoolProvider.getSchoolsByPhone(filterText))
         }
     }
 
     private fun listSchoolByDate(filterDate: LocalDate) {
-        grid?.setItems(DataService.schoolDao.getSchoolsByFoundationDate(filterDate))
+        grid?.setItems(SchoolSearchService.schoolProvider.getSchoolsByFoundationDate(filterDate))
     }
 
     override fun enter(event: ViewChangeListener.ViewChangeEvent?) {

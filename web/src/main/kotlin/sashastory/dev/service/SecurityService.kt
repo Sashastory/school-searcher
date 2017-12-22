@@ -7,20 +7,23 @@ import com.vaadin.shared.Position
 import com.vaadin.ui.Notification
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.model.AppUser
+import sashastory.dev.model.provider.AppUserProvider
 
 /**
  * @author Александр
  * @date 17.12.2017
  */
 
-object AuthenticationService {
+object SecurityService {
+
+    val appUserProvider = AppUserProvider
 
     val currentUser: AppUser?
         get() = Session[AppUser::class]
 
     fun login(userName:String, password: String) {
 
-        val dbUser = DataService.appUserDao.getUserByUserNameAndPassword(userName, password).firstOrNull {
+        val dbUser = appUserProvider.getUserByUserNameAndPassword(userName, password).firstOrNull {
             user -> user.userName == userName && user.password == password
         }
 
@@ -41,4 +44,9 @@ object AuthenticationService {
         VaadinSession.getCurrent().close()
         Page.getCurrent().reload()
     }
+
+    fun register(user: AppUser) {
+        appUserProvider.saveUser(user)
+    }
+
 }

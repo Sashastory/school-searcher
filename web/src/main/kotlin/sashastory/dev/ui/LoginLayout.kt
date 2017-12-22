@@ -6,7 +6,7 @@ import com.vaadin.ui.TextField
 import com.vaadin.ui.UI
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.themes.ValoTheme
-import sashastory.dev.service.AuthenticationService
+import sashastory.dev.service.SecurityService
 
 /**
  * @author Александр
@@ -59,6 +59,6 @@ class LoginLayout : VerticalLayout() {
     }
 
     private fun login() {
-        AuthenticationService.login(username.value, password.value)
+        SecurityService.login(username.value, password.value)
     }
 }

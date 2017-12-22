@@ -14,7 +14,7 @@ import com.vaadin.shared.ui.ui.Transport
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
 import org.slf4j.LoggerFactory
-import sashastory.dev.service.AuthenticationService
+import sashastory.dev.service.SecurityService
 
 
 @Theme("mytheme")
@@ -23,7 +23,7 @@ import sashastory.dev.service.AuthenticationService
 class SecuredUI : UI() {
 
     override fun init(request: VaadinRequest?) {
-        if (AuthenticationService.currentUser == null) {
+        if (SecurityService.currentUser == null) {
             content = LoginLayout()
             return
         }
@@ -36,7 +36,7 @@ class SecuredUI : UI() {
             menuButton("Свободные места", VaadinIcons.ACADEMY_CAP, view = ApplicationView::class.java)
             section("")
             menuButton("О подсистеме", VaadinIcons.HOME, view = WelcomeView::class.java)
-            menuButton("Выход", VaadinIcons.SIGN_OUT, block = { onLeftClick { AuthenticationService.logout() } })
+            menuButton("Выход", VaadinIcons.SIGN_OUT, block = { onLeftClick { SecurityService.logout() } })
         }
         setContent(content)
         navigator = Navigator(this, content as ViewDisplay)

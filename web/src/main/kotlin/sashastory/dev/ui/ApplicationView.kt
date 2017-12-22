@@ -9,9 +9,7 @@ import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
 import sashastory.dev.model.Application
 import sashastory.dev.model.Form
-import sashastory.dev.service.ApplicationService
-import sashastory.dev.service.AuthenticationService
-import sashastory.dev.service.DataService
+import sashastory.dev.service.*
 import java.util.*
 
 /**
@@ -31,7 +29,7 @@ class ApplicationView : VerticalLayout(), View {
 
     init {
         isSpacing = false
-        schoolMap = DataService.schoolDao.getSchoolsWithFreeSpots().map { it.schoolName to it.id }.toMap()
+        schoolMap = SchoolSearchService.schoolProvider.getSchoolsWithFreeSpots().map { it.schoolName to it.id }.toMap()
         verticalLayout {
             label("Прием заявок на поступление") {
                 alignment = Alignment.TOP_LEFT
@@ -76,7 +74,8 @@ class ApplicationView : VerticalLayout(), View {
 
         if (schoolSelect.value != null) {
 
-            val forms: List<Form> = DataService.formDao.getFormsWithSpotsForSchoolId(schoolMap[schoolSelect.value]!!)
+            val forms: List<Form>
+                    = FormSearchService.formProvider.getFormsWithSpotsForSchoolId(schoolMap[schoolSelect.value]!!)
             formMap = forms.map { it.formNumber to it.id }.toMap()
 
             formSelect.isVisible = true
@@ -91,7 +90,7 @@ class ApplicationView : VerticalLayout(), View {
     private fun apply() {
         if (selectedSchool.isNotEmpty() && selectedForm.isNotEmpty()) {
             val application = Application(
-                    appUserId = AuthenticationService.currentUser?.id,
+                    appUserId = SecurityService.currentUser?.id,
                     schoolId = schoolMap[selectedSchool],
                     formId = formMap[selectedForm],
                     applicationDate = Date())

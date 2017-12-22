@@ -1,6 +1,7 @@
 package sashastory.dev.service
 
 import sashastory.dev.model.Application
+import sashastory.dev.model.provider.ApplicationProvider
 
 /**
  * @author Александр
@@ -8,10 +9,11 @@ import sashastory.dev.model.Application
  */
 object ApplicationService {
 
+    val applicationProvider = ApplicationProvider
+
     fun apply(application: Application) {
-        application.save()
+        applicationProvider.saveApplication(application)
     }
 
-    fun getCurrentUserApplications(id: Long): List<Application>
-            = DataService.applicationDao.getUserApplications(id)
+
 }

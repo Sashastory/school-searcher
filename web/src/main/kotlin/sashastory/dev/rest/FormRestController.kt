@@ -1,10 +1,9 @@
 package sashastory.dev.rest
 
 import sashastory.dev.model.Form
-import sashastory.dev.service.DataService
+import sashastory.dev.service.FormSearchService
 import javax.ws.rs.GET
 import javax.ws.rs.Path
-import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
@@ -16,11 +15,7 @@ import javax.ws.rs.core.MediaType
 class FormRestController {
 
     @GET
-    @Path("/{id}")
-    fun get(@PathParam("id") id: Long) : Form = DataService.formDao.getFormById(id)
-
-    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAll(): List<Form> = DataService.formDao.getAllForms()
+    fun getAll(): List<Form> = FormSearchService.formProvider.getAllForms()
 
 }

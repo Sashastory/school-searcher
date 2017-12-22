@@ -1,10 +1,9 @@
 package sashastory.dev.rest
 
 import sashastory.dev.model.Application
-import sashastory.dev.service.DataService
+import sashastory.dev.service.ApplicationService
 import javax.ws.rs.GET
 import javax.ws.rs.Path
-import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
@@ -16,11 +15,7 @@ import javax.ws.rs.core.MediaType
 class ApplicationRestController {
 
     @GET
-    @Path("/{id}")
-    fun get(@PathParam("id") id: Long) : Application = DataService.applicationDao.getApplicationById(id)
-
-    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAll() : List<Application> = DataService.applicationDao.getAllApplications()
+    fun getAll() : List<Application> = ApplicationService.applicationProvider.getAllApplications()
 
 }

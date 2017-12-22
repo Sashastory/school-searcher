@@ -1,17 +1,11 @@
-package sashastory.dev.model.dao
+package sashastory.dev.model.provider
 
-import com.github.vok.framework.sql2o.Dao
-import com.github.vok.framework.sql2o.Filter
-import com.github.vok.framework.sql2o.findAll
-import com.github.vok.framework.sql2o.findById
+import com.github.vok.framework.sql2o.vaadin.EntityDataProvider
 import com.github.vok.framework.sql2o.vaadin.SqlDataProvider
 import com.github.vok.framework.sql2o.vaadin.and
-import com.github.vok.framework.sql2o.vaadin.dataProvider
 import com.github.vok.framework.sql2o.vaadin.getAll
-import com.vaadin.data.provider.DataProvider
 import sashastory.dev.model.School
 import java.time.LocalDate
-import javax.ws.rs.NotFoundException
 
 
 /**
@@ -19,13 +13,11 @@ import javax.ws.rs.NotFoundException
  * @date 18.12.2017
  */
 
-object SchoolDao : Dao<School> {
+object SchoolProvider {
 
-    private val data : DataProvider<School, Filter<School>?> = dataProvider
+    private val data = EntityDataProvider(School::class.java)
 
-    fun getAllSchools(): List<School> = findAll()
-
-    fun getSchoolById(id: Long): School = findById(id) ?: throw NotFoundException("Нет школы с таким $id")
+    fun getAllSchools(): List<School> = data.getAll()
 
     fun getSchoolsByName(name: String): List<School> =
             data.and { School::schoolName like name }.getAll()
